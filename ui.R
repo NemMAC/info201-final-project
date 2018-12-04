@@ -60,6 +60,30 @@ tabPanel("Map",
            )
          )
          ),   
-tabPanel("Rankings")
+tabPanel("Rankings",
+         titlePanel(
+           "Relative Safety Ranking"
+         ),
+         sidebarLayout(
+           sidebarPanel(
+             helpText(
+               "Choose a metric to rank the neighborhoods of Seattle. If you would like to see information about
+               a specific area type it's name in the box below. 
+               (Please type all possible names such as CHINATOWN/INTERNATIONAL DISTRICT.)"
+             ),
+             selectInput("rank", label = ("Metric for Ranking"),
+                         choices = list("Frequency" = 1, "Violent Crimes" = 2, "Petty/Other crimes" = 3, "Sexual Assault" = 4),
+                         selected = "Frequency"
+           ),
+           textInput("text", label = "Choose Neighborhood", value = "Enter Name...")
+         ),
+         mainPanel(
+           fluidRow(
+             splitLayout(cellWidths = c("50%", "50%"), tableOutput("table"), tableOutput("table2"))
+           ),
+           tableOutput("single")
+         )
+         )
+)
 )
 )

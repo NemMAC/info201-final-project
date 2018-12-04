@@ -20,9 +20,9 @@ of a certain type of crime that can be picked. Finally, the last tab allows one 
 
 ## Analysis
 With our data we aim to see:
-1. Where crimes occur most frequently?
-2. See which area of Seattle has the most criminal activity?
-3. Be able to relatively rank areas based purely on data in order to avoid bias.
+- Where crimes occur most frequently?
+- See which area of Seattle has the most criminal activity?
+- Be able to relatively rank areas based purely on data in order to avoid bias.
 
 ## Creators
 - Akshat Pandey
