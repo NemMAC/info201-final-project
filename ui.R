@@ -13,8 +13,14 @@ ui <- fluidPage(
   navbarPage("Crimes in Seattle",
              tabPanel("Overview"),
              tabPanel("Histogram", 
+                      titlePanel(
+                        "Plot of Crimes by Precinct"
+                      ),
                       sidebarLayout(
                         sidebarPanel(
+                          helpText(
+                            "Choose Precinct and Dates to view data from"
+                          ),
                           radioButtons("selectPrecinct", "Precinct", precinctOption),
                           dateRangeInput("dateRange", 
                                          label = "Date Range",
@@ -32,9 +38,7 @@ ui <- fluidPage(
              ),
 tabPanel("Map", 
          titlePanel(
-           p("Seattle - Crime Map"),
-           p("The below contains all the instances of the chosen crime as well as exact location 
-             when you click on a point.")
+           "Seattle - Crime Map"
            ),
          sidebarLayout(
            sidebarPanel(
