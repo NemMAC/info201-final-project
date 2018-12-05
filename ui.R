@@ -11,7 +11,9 @@ precinctOption <- precinctOption[-5]
 
 ui <- fluidPage(
   navbarPage("Crimes in Seattle",
-             tabPanel("Overview"),
+             tabPanel("Overview",
+                      includeMarkdown("overview.md")
+                      ),
              tabPanel("Histogram", 
                       titlePanel(
                         "Plot of Crimes by Precinct"
