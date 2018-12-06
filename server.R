@@ -6,6 +6,7 @@ library(leaflet)
 
 server <- function(input, output) {
   
+  ## Read data
   map_data <- read.table("Crime_Data_Map.csv", stringsAsFactors = FALSE)
   crimeDataFull <- read.csv("Crime_Data.csv",  stringsAsFactors = FALSE)
   crimeDataCut <- select(crimeDataFull, Occurred.Date, Crime.Subcategory, Precinct, Neighborhood)
@@ -15,7 +16,7 @@ server <- function(input, output) {
                                      Crime.Subcategory != "")
   })
     
-    
+    ## Create histograms
       reactive({crimeDataReact %>% 
           ggvis(~factor(Crime.Subcategory), fill = ~factor(Crime.Subcategory)) %>%
           add_axis("x", 
@@ -33,6 +34,7 @@ server <- function(input, output) {
         df <- filter(map_data, map_data$Event.Clearance.Group == input$select)
       })
       
+  ## Make map
       output$map <- renderLeaflet({
         m_data <- get_specific_map_data()
         leaflet(m_data) %>%
@@ -43,6 +45,7 @@ server <- function(input, output) {
         
       })
       
+  ## Get data for table
       get_table_data <- reactive({
         if(input$rank == 1) {
           df <- as.data.frame(table(crimeDataCut$Neighborhood)) %>%
@@ -71,21 +74,25 @@ server <- function(input, output) {
         }
       })
       
+  ## Get data for single neighborhood
       get_single_data <- reactive({
         table <- get_table_data()
         result <- filter(table, table$Neighborhood == input$text)
       })
       
+  ## Create table 10 safest
       output$table <- renderTable({
         data <- get_table_data()
         head(data, 10)
       })
       
+  ## Create table 10 dangerous
       output$table2 <- renderTable({
         data <- get_table_data()
         tail(data, 10)
       })
       
+  ## Create table single neighborhood
       output$single <- renderTable({
         data <- get_single_data()
       })
